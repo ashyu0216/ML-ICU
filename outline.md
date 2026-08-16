@@ -88,8 +88,7 @@ truth is known.
   verified from data alone; note which important confounders might be
   missing from the demo dataset's available variables.
 - If overlap is poor, say so directly and explain what that means for the
-  estimate's reliability (this is a legitimate, PhD-level finding on its
-  own — not a failure of the project).
+  estimate's reliability.
 - Close with the generalizable point: DML gives a theoretically grounded way
   to combine ML flexibility with valid causal inference, but its practical
   reliability depends on overlap and sample size, which should be checked
