@@ -2,9 +2,7 @@
 
 A Double Machine Learning (DML) analysis of whether early vasopressor
 initiation causally affects in-hospital ICU mortality, using the MIMIC-IV
-Clinical Database Demo. Built as a statistics-PhD-oriented project:
-methodology → simulation validation → real-data testing → interpretation,
-with every claim backed by a validation step rather than taken on faith.
+Clinical Database Demo.
 
 ## Research Question
 
@@ -81,7 +79,7 @@ overlap 0.62, weak due to confounding-by-indication. Primary trim
 **Simulation validation**: DML bias shrinks toward zero with sample size
 (unlike a naive logistic-regression baseline, whose bias stays flat
 regardless of n). Under weak-overlap conditions resembling the real cohort,
-95% CI coverage stays below the nominal target even at n=1000 — meaning
+95% CI coverage stays below the nominal target even at n=1000, meaning
 real-data CIs should be read as conservative lower bounds on true
 uncertainty.
 
@@ -90,20 +88,20 @@ uncertainty.
 | Primary [0.10, 0.90] | 0.050 | [-0.135, 0.234] | 2.79 |
 | Robustness [0.05, 0.95] | 0.006 | [-0.180, 0.192] | 2.96 |
 
-Causal forest overall ATE: 0.082, 95% CI [-0.118, 0.281] — consistent with
+Causal forest overall ATE: 0.082, 95% CI [-0.118, 0.281] —> consistent with
 the DML estimates. Zero of 61 patients showed individually significant
 heterogeneous effects.
 
 **Conclusion**: no statistically or practically significant evidence that
 early vasopressor initiation affects in-hospital mortality in this cohort.
-This null result is validated, not just asserted — the simulation predicted
+This null result is validated, not just asserted. The simulation predicted
 in advance that this sample size and overlap quality would produce wide,
 inconclusive intervals, and the real-data result matches that prediction.
 See `results_interpretation.md` for the full discussion and limitations.
 
 ## Limitations
 
-- MIMIC-IV Demo is a 100-patient, single-center subset — underpowered for
+- MIMIC-IV Demo is a 100-patient, single-center subset underpowered for
   causal effect estimation regardless of method.
 - The proxy severity score is a simplified stand-in for validated clinical
   scores (SOFA/APACHE).
