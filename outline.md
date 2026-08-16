@@ -22,7 +22,7 @@ synthetic data with known ground truth before applying it to MIMIC-IV data.
 - **Outcome (Y)**: binary, in-hospital mortality.
 - **Confounders (X)**: baseline severity (e.g. SOFA/SAPS if derivable from
   the demo tables), age, key labs (lactate, creatinine), comorbidity
-  indicators — the same feature set used in the prior RF/SHAP work is a
+  indicators. The same feature set used in the prior RF/SHAP work is a
   reasonable starting point.
 - **Estimator**: Double Machine Learning.
   - Nuisance functions: outcome regression E[Y | X] and propensity model
@@ -33,12 +33,12 @@ synthetic data with known ground truth before applying it to MIMIC-IV data.
     model (the key theoretical property that separates this from naive
     "adjust with ML and read off the coefficient" approaches).
   - Cross-fitting: split data into K folds, estimate nuisance functions on
-    K-1 folds, evaluate the score on the held-out fold, rotate — avoids
+    K-1 folds, evaluate the score on the held-out fold, rotate —> avoids
     overfitting bias from using the same data to fit nuisances and estimate
     the effect.
 - **Identification assumption**: state unconfoundedness (no unmeasured
   confounders given X) and overlap (positive probability of treatment at
-  every X) explicitly as assumptions, not facts — this is observational
+  every X) explicitly as assumptions, not facts. This is observational
   data.
 
 ## 2. Simulation Validation
@@ -55,7 +55,7 @@ truth is known.
   - **Coverage**: does the 95% CI contain the true effect ~95% of the time?
   - **RMSE**: overall estimation error.
 - Vary sample size (e.g. n = 107, 250, 500, 1000) to show how DML's
-  performance changes near the real cohort's size — this directly informs
+  performance changes near the real cohort's size. This directly informs
   how much to trust the real-data result.
 - Vary propensity overlap (well-separated vs. poorly-separated treatment
   groups) to test robustness under conditions similar to real vasopressor
@@ -70,7 +70,7 @@ truth is known.
   the tendency for sicker patients to receive vasopressors).
 - **Robustness checks**: re-run with different ML learners for the nuisance
   functions (random forest vs. gradient boosting) and confirm the estimate
-  doesn't change much — sensitivity to learner choice is itself informative.
+  doesn't change much —> sensitivity to learner choice is itself informative
 - Optional extension: fit a causal forest on the same data to estimate
   heterogeneous effects (e.g. does the effect differ by age or severity),
   using the DML ATE as the benchmark the CATE estimates should average to.
