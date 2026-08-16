@@ -5,7 +5,7 @@
 n=100 ICU stays (one per patient, after deduplicating repeat stays), 35
 treated (early vasopressor), 11 deaths. Initial common-support coverage was
 weak (0.620), with treated patients concentrated near propensity ≈1.0 and
-controls near ≈0.0 — consistent with confounding-by-indication. A trim-bound
+controls near ≈0.0, consistent with confounding-by-indication. A trim-bound
 sweep supported `[0.10, 0.90]` as the primary analysis (n=61, 30 treated, 8
 deaths), with `[0.05, 0.95]` as a wider robustness check (n=78, 33 treated,
 9 deaths).
@@ -23,7 +23,7 @@ sample sizes 107–1000 and two confounding-strength settings.
 | Strong | 107 | 0.151 | 0.106 | 0.67 |
 | Strong | 1000 | 0.146 | 0.054 | 0.83 |
 
-The naive baseline's bias never shrinks with n — a systematic, model-
+The naive baseline's bias never shrinks with n, a systematic, model-
 misspecification bias. DML's bias shrinks toward zero as n grows under both
 settings, confirming consistency. Under strong confounding (the setting
 that resembles the real cohort), DML's coverage stays below the nominal
@@ -33,7 +33,7 @@ confidence intervals below likely understate true uncertainty.**
 ## 3. Real-Data DML Estimates
 
 **Note on reproducibility**: the numbers below use repeated cross-fitting
-(20 repeats, deterministic seeds, median point estimate — following
+(20 repeats, deterministic seeds, median point estimate, following
 Chernozhukov et al. 2018's recommendation for stabilizing DML against
 fold-partition randomness). An earlier single-split version of this
 pipeline gave inconsistent results across runs on the same cohort (e.g.
@@ -46,7 +46,7 @@ is now resolved, and these numbers are stable under re-execution.
 | Robustness [0.05, 0.95] | 78 | 9 | 0.006 | [-0.180, 0.192] | [-0.057, 0.059] |
 
 Both intervals comfortably contain zero, and both trims now agree in sign
-(small, positive) — a more stable and more defensible result than the
+(small, positive), a more stable and more defensible result than the
 earlier sign-flipping version. The naive logistic-regression estimate
 (0.067 and 0.050 respectively) is similar in magnitude to the DML point
 estimates here; the two methods agree more closely on this cohort than
@@ -56,11 +56,11 @@ estimation uncertainty.
 
 ## 4. Causal Forest Cross-Check
 
-Overall ATE: 0.082, 95% CI [-0.118, 0.281] — consistent in sign and overlap
+Overall ATE: 0.082, 95% CI [-0.118, 0.281] —> consistent in sign and overlap
 with the primary DML estimate. 0 of 61 patients showed an individually
 significant CATE (a clean null, not "a few by chance"). Heterogeneity
 importance was diffuse across WBC, age, heart rate, respiratory rate, and
-SBP (0.14–0.18 each) — no single dominant effect-modifier. Visual
+SBP (0.14–0.18 each) —> no single dominant effect-modifier. Visual
 inspection suggested weak, non-significant downward trends in CATE along
 WBC and SBP; noted as hypotheses for future work, not confirmed findings.
 
@@ -73,7 +73,7 @@ WBC and SBP; noted as hypotheses for future work, not confirmed findings.
 
 Point-estimate E-values of 2.5–3.1: a moderately-to-fairly strong
 unmeasured confounder would be needed to fully explain away the point
-estimates — not trivial, but plausible given the confounder set lacks a
+estimates. Not trivial, but plausible given the confounder set lacks a
 true severity score. Because both CIs already include the null, the
 E-value for the CI bound is trivially 1: no hidden confounder is needed to
 explain a result that isn't statistically significant to begin with.
@@ -85,7 +85,7 @@ explain a result that isn't statistically significant to begin with.
 early vasopressor initiation affects in-hospital mortality in this cohort.
 Point estimates are small, consistently positive (0.050 and 0.006 across
 the two trims, 0.082 from the causal forest), and always within wide
-intervals spanning zero — exactly what the simulation validation predicted
+intervals spanning zero, which is exactly what the simulation validation predicted
 would happen at this sample size and overlap quality.
 
 **Reproducibility note**: an earlier version of this pipeline showed the
@@ -97,8 +97,8 @@ in Section 3 confirm the fold-partition sensitivity is now small relative
 to the point estimate.
 
 **Why this is a legitimate finding**: the project's contribution isn't "we
-proved vasopressors do or don't cause harm" — the data can't support that —
-it's a demonstrated, validated pipeline that shows *why* that claim can't
+proved vasopressors do or don't cause harm", the data can't support that.
+It's a demonstrated, validated pipeline that shows *why* that claim can't
 currently be supported, and what would be needed to support it (more data,
 better overlap, a real severity score, stabilized cross-fitting).
 
